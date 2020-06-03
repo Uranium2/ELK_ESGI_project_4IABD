@@ -28,7 +28,7 @@ def build_model():
 
   model.compile(loss='mse',
                 optimizer=optimizer,
-                metrics=['mae'])
+                metrics=[tf.keras.metrics.Accuracy(), 'mae'])
   return model
 
 def create_dataframe_from_ESjson(elastic_docs):
@@ -168,10 +168,8 @@ EPOCHS = 500
 history = model.fit(X_train, y_train, epochs=EPOCHS,
                     validation_split=0.2, verbose=1)
 
-[loss, mae] = model.evaluate(X_test, y_test, verbose=0)
+[loss, accuracy, mae] = model.evaluate(X_test, y_test, verbose=0)
 
-print("Testing set Mean Abs Error: {:7.2f}".format(mae))
+logger.info("Testing set Mean Abs Error: {:7.2f}".format(mae))
 
 test_predictions = model.predict(X_test).flatten()
-
-print(test_predictions)
