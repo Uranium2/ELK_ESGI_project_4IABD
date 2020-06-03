@@ -170,6 +170,8 @@ history = model.fit(X_train, y_train, epochs=EPOCHS,
 
 [loss, accuracy, mae] = model.evaluate(X_test, y_test, verbose=0)
 
-logger.info("Testing set Mean Abs Error: {:7.2f}".format(mae))
+logger.info("Machine Learning -Mean Abs Error: {:7.2f}".format(mae))
 
 test_predictions = model.predict(X_test).flatten()
+
+logger.info("Machine Learning - Prediction on test : {}".format(test_predictions))
